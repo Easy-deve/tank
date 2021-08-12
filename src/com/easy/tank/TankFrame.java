@@ -11,12 +11,10 @@ import java.awt.event.WindowEvent;
  * @DateTime: 2021/8/9 23:38
  */
 public class TankFrame extends Frame {
-    private int x = 200;
-    private int y = 200;
-    private boolean leftKey = false;
-    private boolean rightKey = false;
-    private boolean upKey = false;
-    private boolean downKey = false;
+    private int x = 200, y = 200;
+    private Dir dir = Dir.STOP;
+    private static final int SPEED = 10;
+
     public TankFrame() {
         setVisible(true);
         setSize(800, 600);
@@ -37,11 +35,30 @@ public class TankFrame extends Frame {
     public void paint(Graphics g) {
         System.out.println("x: " + x + ",y: " + y);
         g.fillRect(x, y, 50, 50);
-//        x += 10;
-//        y += 10;
+        switch (dir) {
+            case LEFT:
+                x -= SPEED;
+                break;
+            case UP:
+                y -= SPEED;
+                break;
+            case RIGHT:
+                x += SPEED;
+                break;
+            case DOWN:
+                y += SPEED;
+                break;
+            default:
+                break;
+        }
     }
 
     class MyKeyListener extends KeyAdapter {
+        private boolean leftKey = false;
+        private boolean rightKey = false;
+        private boolean upKey = false;
+        private boolean downKey = false;
+
         @Override
         public void keyPressed(KeyEvent e) {
             System.out.println("key pressed");
@@ -62,34 +79,7 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
-            if (leftKey) {
-                x -= 10;
-            }
-            if (rightKey) {
-                x += 10;
-            }
-            if (upKey) {
-                y -= 10;
-            }
-            if (downKey) {
-                y += 10;
-            }
-//            switch (key) {
-//                case KeyEvent.VK_LEFT:
-//                    x -= 10;
-//                    break;
-//                case KeyEvent.VK_UP:
-//                    y -= 10;
-//                    break;
-//                case KeyEvent.VK_RIGHT:
-//                    x += 10;
-//                    break;
-//                case KeyEvent.VK_DOWN:
-//                    y += 10;
-//                    break;
-//                default:
-//                    break;
-//            }
+            getMainTankDir();
         }
 
         @Override
@@ -112,6 +102,14 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
+            getMainTankDir();
+        }
+
+        private void getMainTankDir() {
+            if (leftKey) dir = Dir.LEFT;
+            if (upKey) dir = Dir.UP;
+            if (rightKey) dir = Dir.RIGHT;
+            if (downKey) dir = Dir.DOWN;
         }
     }
 }
