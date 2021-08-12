@@ -11,9 +11,8 @@ import java.awt.event.WindowEvent;
  * @DateTime: 2021/8/9 23:38
  */
 public class TankFrame extends Frame {
-    private int x = 200, y = 200;
-    private Dir dir = Dir.STOP;
-    private static final int SPEED = 10;
+
+    Tank myTank = new Tank(200, 200, Dir.DOWN);
 
     public TankFrame() {
         setVisible(true);
@@ -33,24 +32,7 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        System.out.println("x: " + x + ",y: " + y);
-        g.fillRect(x, y, 50, 50);
-        switch (dir) {
-            case LEFT:
-                x -= SPEED;
-                break;
-            case UP:
-                y -= SPEED;
-                break;
-            case RIGHT:
-                x += SPEED;
-                break;
-            case DOWN:
-                y += SPEED;
-                break;
-            default:
-                break;
-        }
+        myTank.paint(g);
     }
 
     class MyKeyListener extends KeyAdapter {
@@ -106,10 +88,15 @@ public class TankFrame extends Frame {
         }
 
         private void getMainTankDir() {
-            if (leftKey) dir = Dir.LEFT;
-            if (upKey) dir = Dir.UP;
-            if (rightKey) dir = Dir.RIGHT;
-            if (downKey) dir = Dir.DOWN;
+            if (leftKey || upKey || rightKey || downKey) {
+                myTank.setMoving(true);
+                if (leftKey) myTank.setDir(Dir.LEFT);
+                if (upKey) myTank.setDir(Dir.UP);
+                if (rightKey) myTank.setDir(Dir.RIGHT);
+                if (downKey) myTank.setDir(Dir.DOWN);
+            } else {
+                myTank.setMoving(false);
+            }
         }
     }
 }
