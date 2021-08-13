@@ -10,8 +10,8 @@ public class Tank {
     private int x, y;
     private Dir dir;
     private static final int SPEED = 10;
-    public static final int width = 50;
-    public static final int height = 50;
+    public static final int WIDTH = 50;
+    public static final int HEIGHT = 50;
     private boolean moving = false;
 
     public Tank(int x, int y, Dir dir) {
@@ -39,7 +39,7 @@ public class Tank {
 
     public void paint(Graphics g) {
         System.out.println("x: " + x + ",y: " + y);
-        g.fillRect(x, y, width, height);
+        g.fillRect(x, y, WIDTH, HEIGHT);
         move();
     }
 
