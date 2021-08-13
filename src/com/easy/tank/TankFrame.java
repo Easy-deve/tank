@@ -1,5 +1,7 @@
 package com.easy.tank;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -12,12 +14,14 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
 
+    static final int IMAGE_HEIGHT = 600;
+    static final int IMAGE_WIDTH = 800;
     Tank myTank = new Tank(200, 200, Dir.DOWN);
     Bullet bullet = new Bullet(200, 200, Dir.DOWN);
 
     public TankFrame() {
         setVisible(true);
-        setSize(800, 600);
+        setSize(IMAGE_WIDTH, IMAGE_HEIGHT);
         setResizable(false);
         setTitle("tank war");
 
@@ -31,6 +35,20 @@ public class TankFrame extends Frame {
         addKeyListener(new MyKeyListener());
     }
 
+    Image offScreenImage = null;
+    @Override
+    public void update(Graphics g) {
+        if (offScreenImage == null) {
+            offScreenImage = this.createImage(IMAGE_WIDTH, IMAGE_HEIGHT);
+        }
+        Graphics imageGraphics = offScreenImage.getGraphics();
+        Color color = imageGraphics.getColor();
+        imageGraphics.setColor(Color.BLUE);
+        imageGraphics.fillRect(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
+        imageGraphics.setColor(color);
+        paint(imageGraphics);
+        g.drawImage(offScreenImage, 0, 0, null);
+    }
     @Override
     public void paint(Graphics g) {
         myTank.paint(g);
