@@ -54,10 +54,23 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
+        drawString(g);
         myTank.paint(g);
-        for (Bullet bullet : bulletList) {
-            bullet.paint(g);
+
+        for (int i = 0; i <bulletList.size() ; i++) {
+            bulletList.get(i).paint(g);
         }
+        // 会报java.util.ConcurrentModificationException异常
+//        for (Bullet bullet : bulletList) {
+//            bullet.paint(g);
+//        }
+    }
+
+    private void drawString(Graphics g) {
+        Color color = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("子弹的数量" + bulletList.size(), 10, 60);
+        g.setColor(color);
     }
 
     class MyKeyListener extends KeyAdapter {
