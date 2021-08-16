@@ -7,6 +7,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author: yangzhiyao
@@ -17,7 +19,7 @@ public class TankFrame extends Frame {
     static final int IMAGE_HEIGHT = 600;
     static final int IMAGE_WIDTH = 800;
     Tank myTank = new Tank(200, 200, Dir.DOWN, this);
-    Bullet bullet = new Bullet(200, 200, Dir.DOWN);
+    List<Bullet> bulletList = new ArrayList<Bullet>();
 
     public TankFrame() {
         setVisible(true);
@@ -49,10 +51,13 @@ public class TankFrame extends Frame {
         paint(imageGraphics);
         g.drawImage(offScreenImage, 0, 0, null);
     }
+
     @Override
     public void paint(Graphics g) {
         myTank.paint(g);
-        bullet.paint(g);
+        for (Bullet bullet : bulletList) {
+            bullet.paint(g);
+        }
     }
 
     class MyKeyListener extends KeyAdapter {
