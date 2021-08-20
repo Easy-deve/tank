@@ -62,6 +62,11 @@ public class TankFrame extends Frame {
         for (int i = 0; i < tankList.size(); i++) {
             tankList.get(i).paint(g);
         }
+        for (int i = 0; i < bulletList.size(); i++) {
+            for (int j = 0; j < tankList.size(); j++) {
+                bulletList.get(i).collideWith(tankList.get(j));
+            }
+        }
         // 会报java.util.ConcurrentModificationException异常
         // for (Bullet bullet : bulletList) {
         //     bullet.paint(g);

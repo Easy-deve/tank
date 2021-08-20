@@ -14,6 +14,7 @@ public class Tank {
     public static final int HEIGHT = ResourceMgr.tankD.getHeight();
     private boolean moving = false;
     private TankFrame tankFrame;
+    private boolean living = true;
 
     public Tank(int x, int y, Dir dir, TankFrame tankFrame) {
         super();
@@ -21,6 +22,22 @@ public class Tank {
         this.y = y;
         this.dir = dir;
         this.tankFrame = tankFrame;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public boolean isMoving() {
@@ -40,6 +57,13 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+        if (!living) {
+            // 直接用return会出现坦克看似消失实际没消失的问题，
+            // 因为最开始坦克已经生成，return并没有把对应的坦克应用remove掉，
+            // 容易发生内存泄漏。
+            // return;
+            tankFrame.tankList.remove(this);
+        }
         System.out.println("x: " + x + ",y: " + y);
 //        g.fillRect(x, y, WIDTH, HEIGHT);
         switch (dir) {
@@ -82,5 +106,9 @@ public class Tank {
         int bX = this.x + WIDTH / 2 - Bullet.WIDTH / 2;
         int bY = this.y + HEIGHT / 2 - Bullet.HEIGHT / 2;
         tankFrame.bulletList.add(new Bullet(bX, bY, this.dir, tankFrame));
+    }
+
+    public void die() {
+        this.living = false;
     }
 }
