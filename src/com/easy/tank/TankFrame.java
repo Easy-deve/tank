@@ -18,9 +18,9 @@ public class TankFrame extends Frame {
 
     static final int IMAGE_HEIGHT = 600;
     static final int IMAGE_WIDTH = 800;
-    Tank myTank = new Tank(200, 200, Dir.DOWN, this);
-    List<Tank> tankList = new ArrayList<>();
-    List<Bullet> bulletList = new ArrayList<>();
+    Tank myTank = new Tank(200, 400, Dir.UP, this);
+    public List<Tank> tankList = new ArrayList<>();
+    public List<Bullet> bulletList = new ArrayList<>();
 
     public TankFrame() {
         setVisible(true);
@@ -34,9 +34,6 @@ public class TankFrame extends Frame {
             }
         });
         addKeyListener(new MyKeyListener());
-        for (int i = 0; i < 5; i++) {
-            tankList.add(new Tank(100 + i*100,100, Dir.DOWN, this));
-        }
     }
 
     Image offScreenImage = null;
