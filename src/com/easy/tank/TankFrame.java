@@ -19,22 +19,24 @@ public class TankFrame extends Frame {
     static final int IMAGE_HEIGHT = 600;
     static final int IMAGE_WIDTH = 800;
     Tank myTank = new Tank(200, 200, Dir.DOWN, this);
-    List<Bullet> bulletList = new ArrayList<Bullet>();
+    List<Tank> tankList = new ArrayList<>();
+    List<Bullet> bulletList = new ArrayList<>();
 
     public TankFrame() {
         setVisible(true);
         setSize(IMAGE_WIDTH, IMAGE_HEIGHT);
         setResizable(false);
         setTitle("tank war");
-
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
         });
-
         addKeyListener(new MyKeyListener());
+        for (int i = 0; i < 5; i++) {
+            tankList.add(new Tank(100 + i*100,100, Dir.DOWN, this));
+        }
     }
 
     Image offScreenImage = null;
@@ -60,16 +62,20 @@ public class TankFrame extends Frame {
         for (int i = 0; i <bulletList.size() ; i++) {
             bulletList.get(i).paint(g);
         }
+        for (int i = 0; i < tankList.size(); i++) {
+            tankList.get(i).paint(g);
+        }
         // 会报java.util.ConcurrentModificationException异常
-//        for (Bullet bullet : bulletList) {
-//            bullet.paint(g);
-//        }
+        // for (Bullet bullet : bulletList) {
+        //     bullet.paint(g);
+        // }
     }
 
     private void drawString(Graphics g) {
         Color color = g.getColor();
         g.setColor(Color.WHITE);
         g.drawString("子弹的数量" + bulletList.size(), 10, 60);
+        g.drawString("敌人的数量" + tankList.size(), 10, 80);
         g.setColor(color);
     }
 
