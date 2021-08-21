@@ -1,4 +1,5 @@
 import com.easy.tank.Dir;
+import com.easy.tank.Group;
 import com.easy.tank.Tank;
 import com.easy.tank.TankFrame;
 
@@ -15,7 +16,7 @@ public class Main {
         TankFrame tankFrame = new TankFrame();
         // 初始化敌方坦克
         for (int i = 0; i < 5; i++) {
-            tankFrame.tankList.add(new Tank(150 + i*100,100, Dir.DOWN, tankFrame));
+            tankFrame.tankList.add(new Tank(150 + i*100,50, Dir.DOWN, Group.BAD, tankFrame));
         }
 
         while(true) {

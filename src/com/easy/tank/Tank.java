@@ -1,6 +1,7 @@
 package com.easy.tank;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * @Author: yangzhiyao
@@ -9,18 +10,21 @@ import java.awt.*;
 public class Tank {
     private int x, y;
     private Dir dir;
-    private static final int SPEED = 10;
+    private static final int SPEED = 1;
     public static final int WIDTH = ResourceMgr.tankD.getWidth();
     public static final int HEIGHT = ResourceMgr.tankD.getHeight();
-    private boolean moving = false;
+    private boolean moving = true;
     private TankFrame tankFrame;
     private boolean living = true;
+    private Random random = new Random();
+    private Group group = Group.BAD;
 
-    public Tank(int x, int y, Dir dir, TankFrame tankFrame) {
+    public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         super();
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tankFrame = tankFrame;
     }
 
@@ -54,6 +58,14 @@ public class Tank {
 
     public void setDir(Dir dir) {
         this.dir = dir;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public void paint(Graphics g) {
@@ -98,14 +110,15 @@ public class Tank {
                 y += SPEED; break;
             default: break;
         }
+        if (random.nextInt(10) > 8) this.fire();
     }
 
     public void fire() {
-        System.out.println("tank width: " + WIDTH + ", " + "tank height: " + HEIGHT);
-        System.out.println("tank bullet: " + Bullet.WIDTH + ", " + "tank bullet: " + Bullet.HEIGHT);
+//        System.out.println("tank width: " + WIDTH + ", " + "tank height: " + HEIGHT);
+//        System.out.println("tank bullet: " + Bullet.WIDTH + ", " + "tank bullet: " + Bullet.HEIGHT);
         int bX = this.x + WIDTH / 2 - Bullet.WIDTH / 2;
         int bY = this.y + HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tankFrame.bulletList.add(new Bullet(bX, bY, this.dir, tankFrame));
+        tankFrame.bulletList.add(new Bullet(bX, bY, this.dir, group, tankFrame));
     }
 
     public void die() {
