@@ -16,8 +16,8 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
 
-    static final int IMAGE_HEIGHT = 600;
-    static final int IMAGE_WIDTH = 800;
+    static final int IMAGE_HEIGHT = 960;
+    static final int IMAGE_WIDTH = 1080;
     public Tank myTank = new Tank(200, 400, Dir.UP, Group.GOOD, this);
     public List<Tank> tankList = new ArrayList<>();
     public List<Bullet> bulletList = new ArrayList<>();
