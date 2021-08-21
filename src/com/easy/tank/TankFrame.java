@@ -18,9 +18,10 @@ public class TankFrame extends Frame {
 
     static final int IMAGE_HEIGHT = 600;
     static final int IMAGE_WIDTH = 800;
-    Tank myTank = new Tank(200, 400, Dir.UP, Group.GOOD, this);
+    public Tank myTank = new Tank(200, 400, Dir.UP, Group.GOOD, this);
     public List<Tank> tankList = new ArrayList<>();
     public List<Bullet> bulletList = new ArrayList<>();
+    public Explode explode = new Explode(100, 100, this);
 
     public TankFrame() {
         setVisible(true);
@@ -67,6 +68,7 @@ public class TankFrame extends Frame {
                 bulletList.get(i).collideWith(tankList.get(j));
             }
         }
+        explode.paint(g);
         // 会报java.util.ConcurrentModificationException异常
         // for (Bullet bullet : bulletList) {
         //     bullet.paint(g);
