@@ -9,8 +9,8 @@ import java.awt.*;
 public class Bullet {
     public static final int SPEED = 10;
     private int x, y;
-    public static final int WIDTH = ResourceMgr.bulletD.getWidth();
-    public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
+    public static final int WIDTH = ResourceMgr.goodBulletD.getWidth();
+    public static final int HEIGHT = ResourceMgr.goodBulletD.getHeight();
     private Dir bulletDir;
     private boolean living = true;
     private TankFrame tankFrame = null;
@@ -35,16 +35,20 @@ public class Bullet {
 
         switch (bulletDir) {
             case LEFT:
-                g.drawImage(ResourceMgr.bulletL, x, y, null);
+                g.drawImage(this.group == Group.BAD ? ResourceMgr.badBulletL :
+                        ResourceMgr.goodBulletL, x, y, null);
                 break;
             case UP:
-                g.drawImage(ResourceMgr.bulletU, x, y, null);
+                g.drawImage(this.group == Group.BAD ? ResourceMgr.badBulletU :
+                        ResourceMgr.goodBulletU, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.bulletR, x, y, null);
+                g.drawImage(this.group == Group.BAD ? ResourceMgr.badBulletR :
+                        ResourceMgr.goodBulletR, x, y, null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.bulletD, x, y, null);
+                g.drawImage(this.group == Group.BAD ? ResourceMgr.badBulletD :
+                        ResourceMgr.goodBulletD, x, y, null);
                 break;
             default: break;
         }

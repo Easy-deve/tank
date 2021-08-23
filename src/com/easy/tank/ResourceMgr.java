@@ -11,7 +11,8 @@ import java.io.IOException;
 public class ResourceMgr {
     public static BufferedImage goodTankL, goodTankU, goodTankR, goodTankD;
     public static BufferedImage badTankL, badTankU, badTankR, badTankD;
-    public static BufferedImage bulletL, bulletU, bulletR, bulletD;
+    public static BufferedImage goodBulletL, goodBulletU, goodBulletR, goodBulletD;
+    public static BufferedImage badBulletL, badBulletU, badBulletR, badBulletD;
     // 会报NullPointerException，原因：数组初始需要指定长度
     // public static BufferedImage[] explodes;
     public static BufferedImage[] explodes = new BufferedImage[16];
@@ -28,10 +29,15 @@ public class ResourceMgr {
             badTankD = ImageUtil.rotateImage(badTankU, 180);
             badTankL = ImageUtil.rotateImage(badTankU, -90);
 
-            bulletU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
-            bulletR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletR.gif"));
-            bulletD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
-            bulletL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletL.gif"));
+            goodBulletU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
+            goodBulletR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletR.gif"));
+            goodBulletD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
+            goodBulletL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletL.gif"));
+
+            badBulletU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.png"));
+            badBulletR = ImageUtil.rotateImage(badBulletU, 90);
+            badBulletD = ImageUtil.rotateImage(badBulletU, 180);
+            badBulletL = ImageUtil.rotateImage(badBulletU, -90);
 
             for (int i = 0; i < 16; i++) {
                 explodes[i] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e" + (i + 1) + ".gif"));
