@@ -118,6 +118,14 @@ public class Tank {
             randomFire();
             randomDir();
         }
+        boundsCheck();
+    }
+
+    private void boundsCheck() {
+        if (this.x < 0) x = 0;
+        if (this.y < 30) y = 30; // tank bar is 30 height on screen top
+        if (this.x > TankFrame.IMAGE_WIDTH - Tank.WIDTH) x = TankFrame.IMAGE_WIDTH - Tank.WIDTH;
+        if (this.y > TankFrame.IMAGE_HEIGHT - Tank.HEIGHT) y = TankFrame.IMAGE_HEIGHT - Tank.HEIGHT;
     }
 
     private void randomFire() {
