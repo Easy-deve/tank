@@ -1,7 +1,5 @@
 package com.easy.tank;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
-
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -21,7 +19,8 @@ public class TankFrame extends Frame {
     public Tank myTank = new Tank(200, 400, Dir.UP, Group.GOOD, this);
     public List<Tank> tankList = new ArrayList<>();
     public List<Bullet> bulletList = new ArrayList<>();
-    public Explode explode = new Explode(100, 100, this);
+//    public Explode explode = new Explode(100, 100, this);
+    public List<Explode> explodeList = new ArrayList<>();
 
     public TankFrame() {
         setVisible(true);
@@ -63,12 +62,14 @@ public class TankFrame extends Frame {
         for (int i = 0; i < tankList.size(); i++) {
             tankList.get(i).paint(g);
         }
+        for (int i = 0; i < explodeList.size(); i++) {
+            explodeList.get(i).paint(g);
+        }
         for (int i = 0; i < bulletList.size(); i++) {
             for (int j = 0; j < tankList.size(); j++) {
                 bulletList.get(i).collideWith(tankList.get(j));
             }
         }
-        explode.paint(g);
         // 会报java.util.ConcurrentModificationException异常
         // for (Bullet bullet : bulletList) {
         //     bullet.paint(g);
