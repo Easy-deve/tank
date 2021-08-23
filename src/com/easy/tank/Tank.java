@@ -110,7 +110,20 @@ public class Tank {
                 y += SPEED; break;
             default: break;
         }
-        if (random.nextInt(10) > 8) this.fire();
+        if (this.group == Group.BAD) {
+            randomFire();
+            randomDir();
+        }
+    }
+
+    private void randomFire() {
+        if (random.nextInt(100) > 95)
+            this.fire();
+    }
+
+    private void randomDir() {
+        if (random.nextInt(100) > 95)
+            this.dir = Dir.values()[random.nextInt(4)];
     }
 
     public void fire() {
