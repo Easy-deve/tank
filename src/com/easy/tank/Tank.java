@@ -18,6 +18,7 @@ public class Tank {
     private boolean living = true;
     private Random random = new Random();
     private Group group = Group.BAD;
+    public Rectangle rectangle = new Rectangle();
 
     public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         super();
@@ -26,6 +27,10 @@ public class Tank {
         this.dir = dir;
         this.group = group;
         this.tankFrame = tankFrame;
+        this.rectangle.x = this.x;
+        this.rectangle.y = this.y;
+        this.rectangle.width = WIDTH;
+        this.rectangle.height = HEIGHT;
     }
 
     public int getX() {
@@ -119,6 +124,8 @@ public class Tank {
             randomDir();
         }
         boundsCheck();
+        rectangle.x = this.x;
+        rectangle.y = this.y;
     }
 
     private void boundsCheck() {
