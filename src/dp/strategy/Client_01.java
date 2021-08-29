@@ -7,8 +7,15 @@ import java.util.Arrays;
 /**
  * @Author: yangzhiyao
  * @DateTime: 2021/8/27 16:26
+ *
+ * 问题1：对整型数组排序
+ * 问题2：对浮点型数组排序
+ * 问题3：对猫类数组排序（只针对猫的身高）
+ * 问题4：对狗类数组排序（只针对狗的饭量）
+ * 问题5：对猫类数组排序（针对猫的体重）-> 引出策略模式
+ *
  */
-public class client_01 {
+public class Client_01 {
 
     public static void main(String[] args) {
         int[] arr = {1, 6, 2, 7, 9 ,3};
