@@ -15,7 +15,11 @@ public class client_01 {
         Cat[] cats = { new Cat(1,1),new Cat(6,6),
                 new Cat(2,2),new Cat(7,7),
                 new Cat(9,9),new Cat(3,3) };
+        Dog[] dogs = { new Dog(1),new Dog(6), new Dog(2),
+                new Dog(7), new Dog(9),new Dog(3) };
         Sort.sort(cats);
         System.out.println(Arrays.toString(cats));
+        Sort.sort(dogs);
+        System.out.println(Arrays.toString(dogs));
     }
 }
