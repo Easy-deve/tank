@@ -4,7 +4,7 @@ package dp.strategy;
  * @Author: yangzhiyao
  * @DateTime: 2021/8/27 17:21
  */
-public class Cat implements Comparable {
+public class Cat implements Comparable<Cat> {
 
     private int weight;
     private int height;
@@ -43,8 +43,7 @@ public class Cat implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        Cat c = (Cat) o;
+    public int compareTo(Cat c) {
         if (this.height < c.height) return -1;
         else if (this.height > c.height) return 1;
         else return 0;
