@@ -19,6 +19,7 @@ public class Tank {
     private Random random = new Random();
     private Group group = Group.BAD;
     public Rectangle rectangle = new Rectangle();
+    private FireStrategy fireStrategy;
 
     public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         super();
@@ -31,6 +32,19 @@ public class Tank {
         this.rectangle.y = this.y;
         this.rectangle.width = WIDTH;
         this.rectangle.height = HEIGHT;
+        if (this.group == Group.GOOD) {
+            try {
+                fireStrategy = (FireStrategy) Class.forName(String.valueOf(PropertyMgr.get("fireStrategy"))).newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            fireStrategy = new DefaultFireStrategy();
+        }
     }
 
     public int getX() {
@@ -72,6 +86,15 @@ public class Tank {
     public void setGroup(Group group) {
         this.group = group;
     }
+
+    public TankFrame getTankFrame() {
+        return tankFrame;
+    }
+
+    public void setTankFrame(TankFrame tankFrame) {
+        this.tankFrame = tankFrame;
+    }
+
 
     public void paint(Graphics g) {
         if (!living) {
@@ -148,9 +171,10 @@ public class Tank {
     public void fire() {
 //        System.out.println("tank width: " + WIDTH + ", " + "tank height: " + HEIGHT);
 //        System.out.println("tank bullet: " + Bullet.WIDTH + ", " + "tank bullet: " + Bullet.HEIGHT);
-        int bX = this.x + WIDTH / 2 - Bullet.WIDTH / 2;
-        int bY = this.y + HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tankFrame.bulletList.add(new Bullet(bX, bY, this.dir, group, tankFrame));
+//        int bX = this.x + WIDTH / 2 - Bullet.WIDTH / 2;
+//        int bY = this.y + HEIGHT / 2 - Bullet.HEIGHT / 2;
+//        tankFrame.bulletList.add(new Bullet(bX, bY, this.dir, group, tankFrame));
+        fireStrategy.fire(this);
     }
 
     public void die() {

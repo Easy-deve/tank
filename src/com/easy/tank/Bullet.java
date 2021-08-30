@@ -27,6 +27,8 @@ public class Bullet {
         this.rectangle.y = this.y;
         this.rectangle.width = WIDTH;
         this.rectangle.height = HEIGHT;
+        // 默认创建子弹直接加到子弹列表中
+        tankFrame.bulletList.add(this);
     }
 
     public void paint(Graphics g) {
