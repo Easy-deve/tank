@@ -4,12 +4,12 @@ package dp.factory.abstract_factory;
  * @Author: yangzhiyao
  * @DateTime: 2021/9/2 9:50
  */
-public interface BaseFactory {
+public abstract class BaseFactory {
 
-    Vehicle createVehicle();
+    abstract Vehicle createVehicle();
 
-    Weapon createWeapon();
+    abstract Weapon createWeapon();
 
-    Food createFood();
+    abstract Food createFood();
 
 }

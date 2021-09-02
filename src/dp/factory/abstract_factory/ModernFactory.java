@@ -4,7 +4,7 @@ package dp.factory.abstract_factory;
  * @Author: yangzhiyao
  * @DateTime: 2021/9/2 10:17
  */
-public class ModernFactory implements BaseFactory {
+public class ModernFactory extends BaseFactory {
 
     @Override
     public Vehicle createVehicle() {
