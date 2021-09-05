@@ -16,11 +16,8 @@ public class TankFrame extends Frame {
 
     static final int IMAGE_HEIGHT = 960;
     static final int IMAGE_WIDTH = 1080;
-    public Tank myTank = new Tank(200, 400, Dir.UP, Group.GOOD, this);
-    public List<Tank> tankList = new ArrayList<>();
-    public List<Bullet> bulletList = new ArrayList<>();
-//    public Explode explode = new Explode(100, 100, this);
-    public List<Explode> explodeList = new ArrayList<>();
+
+    public GameModel gameModel = new GameModel();
 
     public TankFrame() {
         setVisible(true);
@@ -54,34 +51,15 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         drawString(g);
-        myTank.paint(g);
-
-        for (int i = 0; i <bulletList.size() ; i++) {
-            bulletList.get(i).paint(g);
-        }
-        for (int i = 0; i < tankList.size(); i++) {
-            tankList.get(i).paint(g);
-        }
-        for (int i = 0; i < explodeList.size(); i++) {
-            explodeList.get(i).paint(g);
-        }
-        for (int i = 0; i < bulletList.size(); i++) {
-            for (int j = 0; j < tankList.size(); j++) {
-                bulletList.get(i).collideWith(tankList.get(j));
-            }
-        }
-        // 会报java.util.ConcurrentModificationException异常
-        // for (Bullet bullet : bulletList) {
-        //     bullet.paint(g);
-        // }
+        gameModel.paint(g);
     }
 
     private void drawString(Graphics g) {
         Color color = g.getColor();
         g.setColor(Color.WHITE);
-        g.drawString("子弹的数量" + bulletList.size(), 10, 60);
-        g.drawString("敌人的数量" + tankList.size(), 10, 80);
-        g.drawString("爆炸的数量" + explodeList.size(), 10, 100);
+        g.drawString("子弹的数量" + gameModel.bulletList.size(), 10, 60);
+        g.drawString("敌人的数量" + gameModel.tankList.size(), 10, 80);
+        g.drawString("爆炸的数量" + gameModel.explodeList.size(), 10, 100);
         g.setColor(color);
     }
 
@@ -132,7 +110,7 @@ public class TankFrame extends Frame {
                     downKey = false;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    myTank.fire();
+                    gameModel.myTank.fire();
                     break;
                 default:
                     break;
@@ -141,6 +119,7 @@ public class TankFrame extends Frame {
         }
 
         private void getMainTankDir() {
+            Tank myTank = gameModel.myTank;
             if (leftKey || upKey || rightKey || downKey) {
                 myTank.setMoving(true);
                 if (leftKey) myTank.setDir(Dir.LEFT);

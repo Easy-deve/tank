@@ -1,5 +1,5 @@
 #enemy tank counts initialization
 initTankCounts=10
 #fire strategy
-#fireStrategy=com.easy.tank.FourDirFireStrategy
-fireStrategy=com.easy.tank.DefaultFireStrategy
+fireStrategy=com.easy.tank.FourDirFireStrategy
+#fireStrategy=com.easy.tank.DefaultFireStrategy

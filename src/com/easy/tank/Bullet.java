@@ -13,27 +13,27 @@ public class Bullet {
     public static final int HEIGHT = ResourceMgr.goodBulletD.getHeight();
     private Dir bulletDir;
     private boolean living = true;
-    private TankFrame tankFrame = null;
+    private GameModel gameModel = null;
     private Group group = Group.BAD;
     public Rectangle rectangle = new Rectangle();
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
+    public Bullet(int x, int y, Dir dir, Group group, GameModel gameModel) {
         this.x = x;
         this.y = y;
         this.bulletDir = dir;
         this.group = group;
-        this.tankFrame = tankFrame;
+        this.gameModel = gameModel;
         this.rectangle.x = this.x;
         this.rectangle.y = this.y;
         this.rectangle.width = WIDTH;
         this.rectangle.height = HEIGHT;
         // 默认创建子弹直接加到子弹列表中
-        tankFrame.bulletList.add(this);
+        gameModel.bulletList.add(this);
     }
 
     public void paint(Graphics g) {
         if (!living) {
-            tankFrame.bulletList.remove(this);
+            gameModel.bulletList.remove(this);
         }
 //        Color color = g.getColor();
 //        g.setColor(Color.RED);
@@ -89,7 +89,7 @@ public class Bullet {
             tank.die();
             int eX = tank.getX() + WIDTH / 2 - Explode.WIDTH / 2;
             int eY = tank.getY() + HEIGHT / 2 - Explode.HEIGHT / 2;
-            tankFrame.explodeList.add(new Explode(eX, eY, tankFrame));
+            gameModel.explodeList.add(new Explode(eX, eY, gameModel));
         }
     }
 

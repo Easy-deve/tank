@@ -14,20 +14,21 @@ public class Tank {
     public static final int WIDTH = ResourceMgr.goodTankD.getWidth();
     public static final int HEIGHT = ResourceMgr.goodTankD.getHeight();
     private boolean moving = true;
-    private TankFrame tankFrame;
+//    private TankFrame tankFrame;
+    private GameModel gameModel;
     private boolean living = true;
     private Random random = new Random();
     private Group group = Group.BAD;
     public Rectangle rectangle = new Rectangle();
     private FireStrategy fireStrategy;
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
+    public Tank(int x, int y, Dir dir, Group group, GameModel gameModel) {
         super();
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tankFrame = tankFrame;
+        this.gameModel = gameModel;
         this.rectangle.x = this.x;
         this.rectangle.y = this.y;
         this.rectangle.width = WIDTH;
@@ -87,14 +88,13 @@ public class Tank {
         this.group = group;
     }
 
-    public TankFrame getTankFrame() {
-        return tankFrame;
+    public GameModel getGameModel() {
+        return gameModel;
     }
 
-    public void setTankFrame(TankFrame tankFrame) {
-        this.tankFrame = tankFrame;
+    public void setGameModel(GameModel gameModel) {
+        this.gameModel = gameModel;
     }
-
 
     public void paint(Graphics g) {
         if (!living) {
@@ -102,7 +102,7 @@ public class Tank {
             // 因为最开始坦克已经生成，return并没有把对应的坦克应用remove掉，
             // 容易发生内存泄漏。
             // return;
-            tankFrame.tankList.remove(this);
+            gameModel.tankList.remove(this);
         }
         System.out.println("x: " + x + ",y: " + y);
 //        g.fillRect(x, y, WIDTH, HEIGHT);
