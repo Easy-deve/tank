@@ -1,4 +1,6 @@
-package com.easy.tank;
+package com.easy.strategy;
+
+import com.easy.tank.Tank;
 
 /**
  * @Author: yangzhiyao

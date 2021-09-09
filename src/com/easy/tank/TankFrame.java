@@ -57,9 +57,9 @@ public class TankFrame extends Frame {
     private void drawString(Graphics g) {
         Color color = g.getColor();
         g.setColor(Color.WHITE);
-        g.drawString("子弹的数量" + gameModel.bulletList.size(), 10, 60);
-        g.drawString("敌人的数量" + gameModel.tankList.size(), 10, 80);
-        g.drawString("爆炸的数量" + gameModel.explodeList.size(), 10, 100);
+//        g.drawString("子弹的数量" + gameModel.bulletList.size(), 10, 60);
+//        g.drawString("敌人的数量" + gameModel.tankList.size(), 10, 80);
+//        g.drawString("爆炸的数量" + gameModel.explodeList.size(), 10, 100);
         g.setColor(color);
     }
 

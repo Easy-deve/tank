@@ -1,5 +1,8 @@
 package com.easy.tank;
 
+import com.easy.strategy.DefaultFireStrategy;
+import com.easy.strategy.FireStrategy;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -7,7 +10,7 @@ import java.util.Random;
  * @Author: yangzhiyao
  * @DateTime: 2021/8/12 11:47
  */
-public class Tank {
+public class Tank extends GameObject {
     private int x, y;
     private Dir dir;
     private static final int SPEED = 5;
@@ -102,7 +105,7 @@ public class Tank {
             // 因为最开始坦克已经生成，return并没有把对应的坦克应用remove掉，
             // 容易发生内存泄漏。
             // return;
-            gameModel.tankList.remove(this);
+            gameModel.remove(this);
         }
         System.out.println("x: " + x + ",y: " + y);
 //        g.fillRect(x, y, WIDTH, HEIGHT);

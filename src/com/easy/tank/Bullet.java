@@ -6,7 +6,7 @@ import java.awt.*;
  * @Author: yangzhiyao
  * @DateTime: 2021/8/13 21:02
  */
-public class Bullet {
+public class Bullet extends GameObject {
     public static final int SPEED = 10;
     private int x, y;
     public static final int WIDTH = ResourceMgr.goodBulletD.getWidth();
@@ -28,12 +28,12 @@ public class Bullet {
         this.rectangle.width = WIDTH;
         this.rectangle.height = HEIGHT;
         // 默认创建子弹直接加到子弹列表中
-        gameModel.bulletList.add(this);
+        gameModel.add(this);
     }
 
     public void paint(Graphics g) {
         if (!living) {
-            gameModel.bulletList.remove(this);
+            gameModel.remove(this);
         }
 //        Color color = g.getColor();
 //        g.setColor(Color.RED);
@@ -89,7 +89,7 @@ public class Bullet {
             tank.die();
             int eX = tank.getX() + WIDTH / 2 - Explode.WIDTH / 2;
             int eY = tank.getY() + HEIGHT / 2 - Explode.HEIGHT / 2;
-            gameModel.explodeList.add(new Explode(eX, eY, gameModel));
+            gameModel.add(new Explode(eX, eY, gameModel));
         }
     }
 
