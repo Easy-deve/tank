@@ -31,6 +31,22 @@ public class Bullet extends GameObject {
         gameModel.add(this);
     }
 
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public GameModel getGameModel() {
+        return gameModel;
+    }
+
+    public void setGameModel(GameModel gameModel) {
+        this.gameModel = gameModel;
+    }
+
     public void paint(Graphics g) {
         if (!living) {
             gameModel.remove(this);
@@ -80,20 +96,20 @@ public class Bullet extends GameObject {
         rectangle.y = this.y;
     }
 
-    public void collideWith(Tank tank) {
-        if (tank.getGroup() == this.group) return;
-//        Rectangle rectBullet = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-//        Rectangle rectTank = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
-        if (rectangle.intersects(tank.rectangle)) {
-            this.die();
-            tank.die();
-            int eX = tank.getX() + WIDTH / 2 - Explode.WIDTH / 2;
-            int eY = tank.getY() + HEIGHT / 2 - Explode.HEIGHT / 2;
-            gameModel.add(new Explode(eX, eY, gameModel));
-        }
-    }
+//    public void collideWith(Tank tank) {
+//        if (tank.getGroup() == this.group) return;
+////        Rectangle rectBullet = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+////        Rectangle rectTank = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+//        if (rectangle.intersects(tank.rectangle)) {
+//            this.die();
+//            tank.die();
+//            int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
+//            int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
+//            gameModel.add(new Explode(eX, eY, gameModel));
+//        }
+//    }
 
-    private void die() {
+    public void die() {
         this.living = false;
     }
 }

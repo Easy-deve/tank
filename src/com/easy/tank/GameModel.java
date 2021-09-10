@@ -1,6 +1,7 @@
 package com.easy.tank;
 
 import com.easy.cor.BulletTankCollider;
+import com.easy.cor.ChainCollider;
 import com.easy.cor.TankTankCollider;
 
 import java.awt.*;
@@ -19,8 +20,9 @@ public class GameModel {
 //    //    public Explode explode = new Explode(100, 100, this);
 //    public List<Explode> explodeList = new ArrayList<>();
     public List<GameObject> objectList = new ArrayList<>();
-    BulletTankCollider btCollider = new BulletTankCollider();
-    TankTankCollider ttCollider = new TankTankCollider();
+//    BulletTankCollider btCollider = new BulletTankCollider();
+//    TankTankCollider ttCollider = new TankTankCollider();
+    ChainCollider chainCollider = new ChainCollider();
 
 
     public GameModel() {
@@ -48,6 +50,11 @@ public class GameModel {
         for (int i = 0; i < objectList.size(); i++) {
             objectList.get(i).paint(g);
         }
+        // 会报java.util.ConcurrentModificationException异常
+        // for (Bullet bullet : bulletList) {
+        //     bullet.paint(g);
+        // }
+
 //        for (int i = 0; i <bulletList.size() ; i++) {
 //            bulletList.get(i).paint(g);
 //        }
@@ -62,8 +69,9 @@ public class GameModel {
             for (int j = i+1; j < objectList.size(); j++) {
                 GameObject o1 = objectList.get(i);
                 GameObject o2 = objectList.get(j);
-                btCollider.collide(o1, o2);
-                ttCollider.collide(o1, o2);
+//                btCollider.collide(o1, o2);
+//                ttCollider.collide(o1, o2);
+                chainCollider.collide(o1, o2);
             }
         }
 //        for (int i = 0; i < bulletList.size(); i++) {
@@ -71,9 +79,5 @@ public class GameModel {
 //                bulletList.get(i).collideWith(tankList.get(j));
 //            }
 //        }
-        // 会报java.util.ConcurrentModificationException异常
-        // for (Bullet bullet : bulletList) {
-        //     bullet.paint(g);
-        // }
     }
 }

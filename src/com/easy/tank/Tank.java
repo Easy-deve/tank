@@ -187,7 +187,7 @@ public class Tank extends GameObject {
         this.living = false;
     }
 
-    public void stop() {
+    public void backOff() {
 //        moving = false;
         x = oldX;
         y = oldY;
