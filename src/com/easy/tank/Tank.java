@@ -12,6 +12,7 @@ import java.util.Random;
  */
 public class Tank extends GameObject {
     private int x, y;
+    private int oldX, oldY;
     private Dir dir;
     private static final int SPEED = 5;
     public static final int WIDTH = ResourceMgr.goodTankD.getWidth();
@@ -132,6 +133,8 @@ public class Tank extends GameObject {
     }
 
     private void move() {
+        oldX = x;
+        oldY = y;
         if (!moving) return;
 
         switch (dir) {
@@ -182,5 +185,11 @@ public class Tank extends GameObject {
 
     public void die() {
         this.living = false;
+    }
+
+    public void stop() {
+//        moving = false;
+        x = oldX;
+        y = oldY;
     }
 }

@@ -1,5 +1,8 @@
 package com.easy.tank;
 
+import com.easy.cor.BulletTankCollider;
+import com.easy.cor.TankTankCollider;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +19,13 @@ public class GameModel {
 //    //    public Explode explode = new Explode(100, 100, this);
 //    public List<Explode> explodeList = new ArrayList<>();
     public List<GameObject> objectList = new ArrayList<>();
+    BulletTankCollider btCollider = new BulletTankCollider();
+    TankTankCollider ttCollider = new TankTankCollider();
+
 
     public GameModel() {
+        // 添加自己的坦克到碰撞队列中
+        objectList.add(myTank);
         int initTankCounts = Integer.parseInt((String) PropertyMgr.get("initTankCounts"));
         // 初始化敌方坦克
         for (int i = 0; i < initTankCounts; i++) {
@@ -34,7 +42,8 @@ public class GameModel {
     }
 
     public void paint(Graphics g) {
-        myTank.paint(g);
+        //这里保证自己的坦克会一直重新绘画，永远不死
+//        myTank.paint(g);
 
         for (int i = 0; i < objectList.size(); i++) {
             objectList.get(i).paint(g);
@@ -49,6 +58,14 @@ public class GameModel {
 //            explodeList.get(i).paint(g);
 //        }
 
+        for (int i = 0; i < objectList.size(); i++) {
+            for (int j = i+1; j < objectList.size(); j++) {
+                GameObject o1 = objectList.get(i);
+                GameObject o2 = objectList.get(j);
+                btCollider.collide(o1, o2);
+                ttCollider.collide(o1, o2);
+            }
+        }
 //        for (int i = 0; i < bulletList.size(); i++) {
 //            for (int j = 0; j < tankList.size(); j++) {
 //                bulletList.get(i).collideWith(tankList.get(j));
