@@ -1,8 +1,6 @@
 package com.easy.tank;
 
-import com.easy.cor.BulletTankCollider;
 import com.easy.cor.ChainCollider;
-import com.easy.cor.TankTankCollider;
 
 import java.awt.*;
 import java.util.ArrayList;
