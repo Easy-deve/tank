@@ -17,7 +17,7 @@ public class TankFrame extends Frame {
     static final int IMAGE_HEIGHT = 960;
     static final int IMAGE_WIDTH = 1080;
 
-    public GameModel gameModel = new GameModel();
+//    public GameModel gameModel = new GameModel();
 
     public TankFrame() {
         setVisible(true);
@@ -51,7 +51,7 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         drawString(g);
-        gameModel.paint(g);
+        GameModel.getInstance().paint(g);
     }
 
     private void drawString(Graphics g) {
@@ -110,7 +110,7 @@ public class TankFrame extends Frame {
                     downKey = false;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    gameModel.myTank.fire();
+                    GameModel.getInstance().myTank.fire();
                     break;
                 default:
                     break;
@@ -119,7 +119,7 @@ public class TankFrame extends Frame {
         }
 
         private void getMainTankDir() {
-            Tank myTank = gameModel.myTank;
+            Tank myTank = GameModel.getInstance().myTank;
             if (leftKey || upKey || rightKey || downKey) {
                 myTank.setMoving(true);
                 if (leftKey) myTank.setDir(Dir.LEFT);

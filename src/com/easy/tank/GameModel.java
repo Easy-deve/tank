@@ -12,7 +12,9 @@ import java.util.List;
  */
 public class GameModel {
 
-    public Tank myTank = new Tank(200, 400, Dir.UP, Group.GOOD, this);
+    private static final GameModel INSTANCE = new GameModel();
+
+    public Tank myTank;
 //    public List<Tank> tankList = new ArrayList<>();
 //    public List<Bullet> bulletList = new ArrayList<>();
 //    //    public Explode explode = new Explode(100, 100, this);
@@ -22,19 +24,28 @@ public class GameModel {
 //    TankTankCollider ttCollider = new TankTankCollider();
     ChainCollider chainCollider = new ChainCollider();
 
+    static {
+        INSTANCE.init();
+    }
 
-    public GameModel() {
+    private void init() {
         // 添加自己的坦克到碰撞队列中
-        objectList.add(myTank);
+        myTank = new Tank(200, 400, Dir.UP, Group.GOOD);
         int initTankCounts = Integer.parseInt((String) PropertyMgr.get("initTankCounts"));
         // 初始化敌方坦克
         for (int i = 0; i < initTankCounts; i++) {
-            add(new Tank(150 + i*100,50, Dir.DOWN, Group.BAD, this));
+            new Tank(150 + i*100,50, Dir.DOWN, Group.BAD);
         }
         // 初始化墙
-        add(new Wall(50, 200, 300, 280));
-        add(new Wall(50, 200, 500, 280));
-        add(new Wall(150, 50, 350, 550));
+        new Wall(50, 200, 300, 280);
+        new Wall(50, 200, 500, 280);
+        new Wall(150, 50, 350, 550);
+    }
+
+    private GameModel() { }
+
+    public static GameModel getInstance() {
+        return INSTANCE;
     }
 
     public void add(GameObject gameObject) {

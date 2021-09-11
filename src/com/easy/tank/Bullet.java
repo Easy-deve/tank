@@ -13,22 +13,21 @@ public class Bullet extends GameObject {
     public static final int HEIGHT = ResourceMgr.goodBulletD.getHeight();
     private Dir bulletDir;
     private boolean living = true;
-    private GameModel gameModel = null;
+//    private GameModel gameModel = null;
     private Group group = Group.BAD;
     public Rectangle rectangle = new Rectangle();
 
-    public Bullet(int x, int y, Dir dir, Group group, GameModel gameModel) {
+    public Bullet(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.bulletDir = dir;
         this.group = group;
-        this.gameModel = gameModel;
         this.rectangle.x = this.x;
         this.rectangle.y = this.y;
         this.rectangle.width = WIDTH;
         this.rectangle.height = HEIGHT;
         // 默认创建子弹直接加到子弹列表中
-        gameModel.add(this);
+        GameModel.getInstance().add(this);
     }
 
     public Group getGroup() {
@@ -39,17 +38,9 @@ public class Bullet extends GameObject {
         this.group = group;
     }
 
-    public GameModel getGameModel() {
-        return gameModel;
-    }
-
-    public void setGameModel(GameModel gameModel) {
-        this.gameModel = gameModel;
-    }
-
     public void paint(Graphics g) {
         if (!living) {
-            gameModel.remove(this);
+            GameModel.getInstance().remove(this);
         }
 //        Color color = g.getColor();
 //        g.setColor(Color.RED);

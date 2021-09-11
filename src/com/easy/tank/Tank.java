@@ -19,20 +19,19 @@ public class Tank extends GameObject {
     public static final int HEIGHT = ResourceMgr.goodTankD.getHeight();
     private boolean moving = true;
 //    private TankFrame tankFrame;
-    private GameModel gameModel;
+//    private GameModel gameModel;
     private boolean living = true;
     private Random random = new Random();
     private Group group = Group.BAD;
     public Rectangle rectangle = new Rectangle();
     private FireStrategy fireStrategy;
 
-    public Tank(int x, int y, Dir dir, Group group, GameModel gameModel) {
+    public Tank(int x, int y, Dir dir, Group group) {
         super();
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gameModel = gameModel;
         this.rectangle.x = this.x;
         this.rectangle.y = this.y;
         this.rectangle.width = WIDTH;
@@ -50,6 +49,7 @@ public class Tank extends GameObject {
         } else {
             fireStrategy = new DefaultFireStrategy();
         }
+        GameModel.getInstance().add(this);
     }
 
     public int getX() {
@@ -92,21 +92,13 @@ public class Tank extends GameObject {
         this.group = group;
     }
 
-    public GameModel getGameModel() {
-        return gameModel;
-    }
-
-    public void setGameModel(GameModel gameModel) {
-        this.gameModel = gameModel;
-    }
-
     public void paint(Graphics g) {
         if (!living) {
             // 直接用return会出现坦克看似消失实际没消失的问题，
             // 因为最开始坦克已经生成，return并没有把对应的坦克应用remove掉，
             // 容易发生内存泄漏。
             // return;
-            gameModel.remove(this);
+            GameModel.getInstance().remove(this);
         }
         System.out.println("x: " + x + ",y: " + y);
 //        g.fillRect(x, y, WIDTH, HEIGHT);
