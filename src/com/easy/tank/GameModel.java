@@ -37,9 +37,10 @@ public class GameModel {
             new Tank(150 + i*100,50, Dir.DOWN, Group.BAD);
         }
         // 初始化墙
-        new Wall(50, 200, 300, 280);
-        new Wall(50, 200, 500, 280);
-        new Wall(150, 50, 350, 550);
+        new Wall(150, 150, 200, 50);
+        new Wall(550, 150, 200, 50);
+        new Wall(300, 300, 50, 200);
+        new Wall(550, 300, 50, 200);
     }
 
     private GameModel() { }

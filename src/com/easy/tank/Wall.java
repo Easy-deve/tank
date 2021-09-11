@@ -11,7 +11,7 @@ public class Wall extends GameObject {
     private int height;
     private Rectangle rectangleWall;
 
-    public Wall(int width, int height, int x, int y) {
+    public Wall(int x, int y, int width, int height) {
         this.width = width;
         this.height = height;
         this.x = x;
