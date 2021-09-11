@@ -18,6 +18,15 @@ public class Wall extends GameObject {
         this.y = y;
         rectangleWall = new Rectangle(x, y, width, height);
     }
+
+    public Rectangle getRectangleWall() {
+        return rectangleWall;
+    }
+
+    public void setRectangleWall(Rectangle rectangleWall) {
+        this.rectangleWall = rectangleWall;
+    }
+
     @Override
     public void paint(Graphics g) {
         Color color = g.getColor();

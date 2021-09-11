@@ -4,4 +4,4 @@ initTankCounts=10
 fireStrategy=com.easy.strategy.FourDirFireStrategy
 #fireStrategy=com.easy.strategy.DefaultFireStrategy
 #colliders
-colliders=com.easy.cor.BulletTankCollider,com.easy.cor.TankTankCollider
+colliders=com.easy.cor.BulletTankCollider,com.easy.cor.TankTankCollider,com.easy.cor.BulletWallCollider,com.easy.cor.TankWallCollider
